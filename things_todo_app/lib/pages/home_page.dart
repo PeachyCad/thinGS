@@ -15,6 +15,14 @@ class HomePage extends ConsumerWidget {
     List<ToDo> todoList = ref.watch(todoProvider).todoList;
 
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true, // this is all you need
+        title: const Text(
+          "thinGS",
+          style: TextStyle(fontFamily: 'RobotoMono'),
+        ),
+        backgroundColor: Colors.indigo,
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showDialog(
