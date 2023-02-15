@@ -1,7 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:things_todo_app/models/task.dart';
 import 'package:things_todo_app/models/todo.dart';
 
-class ToDoData {
+class ToDoData extends ChangeNotifier {
   List<ToDo> todoList = [
     ToDo(name: "ToDo 1", tasks: [
       Task(
@@ -41,10 +42,14 @@ class ToDoData {
   void changeTaskStatus(String todoName, String taskName) {
     var foundTask = findTask(todoName, taskName);
     foundTask.isCompleted = !foundTask.isCompleted;
+
+    notifyListeners();
   }
 
   void addToDo(String name) {
     todoList.add(ToDo(name: name, tasks: []));
+
+    notifyListeners();
   }
 
   void addTask(String todoName, String taskName, String description) {
@@ -56,6 +61,8 @@ class ToDoData {
         description: description,
       ),
     );
+
+    notifyListeners();
   }
 
   int amountOfTasksInToDo(String todoName) {
