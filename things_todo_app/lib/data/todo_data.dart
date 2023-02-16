@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:things_todo_app/data/hive_database.dart';
 import 'package:things_todo_app/models/task.dart';
 import 'package:things_todo_app/models/todo.dart';
 
 class ToDoData extends ChangeNotifier {
+  final db = HiveDataBase();
   List<ToDo> todoList = [
     ToDo(name: "ToDo 1", tasks: [
       Task(
@@ -29,6 +31,16 @@ class ToDoData extends ChangeNotifier {
     )
   ];
 
+
+  void initializeToDoList() {
+     if(db.dataAlreadyExists()) {
+      todoList = db.readFromDatabase();
+     }
+     else {
+      db.saveToDatabase(todoList);
+     }
+  }
+
   List<ToDo> getToDoList() {
     return todoList;
   }
@@ -46,6 +58,7 @@ class ToDoData extends ChangeNotifier {
     todoList.add(ToDo(name: todoName, tasks: []));
 
     notifyListeners();
+    db.saveToDatabase(todoList);
   }
 
   void changeToDo(int todoIndex, String newToDoName) {
@@ -53,12 +66,14 @@ class ToDoData extends ChangeNotifier {
     foundToDo.name = newToDoName;
 
     notifyListeners();
+    db.saveToDatabase(todoList);
   }
 
    void deleteToDo(int todoIndex) {
     todoList.removeAt(todoIndex);
 
     notifyListeners();
+    db.saveToDatabase(todoList);
   }
 
     void addTask(int todoIndex, String taskName, String description) {
@@ -72,6 +87,7 @@ class ToDoData extends ChangeNotifier {
     );
 
     notifyListeners();
+    db.saveToDatabase(todoList);
   }
 
    void deleteTask(int todoIndex, int taskIndex) {
@@ -79,6 +95,7 @@ class ToDoData extends ChangeNotifier {
    foundToDo.tasks.removeAt(taskIndex);
 
     notifyListeners();
+    db.saveToDatabase(todoList);
   } 
 
    void changeTaskText(int todoIndex, int taskIndex, String newTaskName, String newTaskDescription) {
@@ -87,6 +104,7 @@ class ToDoData extends ChangeNotifier {
     foundTask.description = newTaskDescription;
 
     notifyListeners();
+    db.saveToDatabase(todoList);
   }
 
   void changeTaskStatus(int todoIndex, int taskIndex) {
@@ -94,6 +112,7 @@ class ToDoData extends ChangeNotifier {
     foundTask.isCompleted = !foundTask.isCompleted;
 
     notifyListeners();
+    db.saveToDatabase(todoList);
   }
 
 

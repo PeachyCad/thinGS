@@ -53,6 +53,14 @@ class _TaskListViewState extends ConsumerState<TaskListView> {
                 ),
               ),
               const SizedBox(width: 10),
+              Checkbox(
+                side: const BorderSide(
+                  color: Colors.white,
+                  width: 2.5,
+                ),
+                value: widget.tasks[index].isCompleted, 
+                onChanged: (_) => ref.read(todoProvider).changeTaskStatus(widget.todoIndex, index)
+              ),
               EditDeleteButtons(
                   onPressedEdit: () {
                     showDialog(

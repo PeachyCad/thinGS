@@ -16,6 +16,13 @@ class HomePage extends ConsumerStatefulWidget {
 
 class _HomePageState extends ConsumerState<HomePage> {
   @override
+  void initState() {
+    super.initState();
+
+    ref.read(todoProvider).initializeToDoList();
+  }
+
+  @override
   Widget build(BuildContext context) {
     List<ToDo> todoList = ref.watch(todoProvider).todoList;
 
