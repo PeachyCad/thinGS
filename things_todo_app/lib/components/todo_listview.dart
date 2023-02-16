@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:things_todo_app/components/text_fragment.dart';
@@ -24,7 +25,7 @@ class _ToDoListViewState extends ConsumerState<ToDoListView> {
   void goToToDoList(String todoName, int todoIndex) {
     Navigator.push(
       context,
-      MaterialPageRoute(
+      CupertinoPageRoute(
         builder: (context) =>
             ToDoPage(todoName: todoName, todoIndex: todoIndex),
       ),

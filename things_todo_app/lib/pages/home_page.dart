@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:things_todo_app/data/todo_data.dart';
 import 'package:things_todo_app/models/todo.dart';
+import 'package:things_todo_app/pages/settings_page.dart';
 import '../components/todo_listview.dart';
 
 final todoProvider = ChangeNotifierProvider((ref) => ToDoData());
@@ -15,6 +17,16 @@ class HomePage extends ConsumerStatefulWidget {
 }
 
 class _HomePageState extends ConsumerState<HomePage> {
+  void goToSettings() {
+    Navigator.push(
+      context,
+      CupertinoPageRoute(
+        builder: (context) =>
+            const SettingsPage(),
+      ),
+    );
+  }
+
   @override
   void initState() {
     super.initState();
@@ -33,6 +45,20 @@ class _HomePageState extends ConsumerState<HomePage> {
           "thinGS",
           style: TextStyle(fontFamily: 'RobotoMono'),
         ),
+        actions: [
+          IconButton(
+            onPressed: () => goToSettings(), 
+            icon: const Icon(
+              Icons.settings_rounded,
+            ),
+          ),
+          IconButton(
+            onPressed: () => sendToServer(), 
+            icon: const Icon(
+              Icons.settings_rounded,
+            ),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -70,6 +96,7 @@ class _HomePageState extends ConsumerState<HomePage> {
         },
         child: const Icon(Icons.add_rounded),
       ),
+      
       body: Center(
         child: ToDoListView(
           todoList: todoList,
