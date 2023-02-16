@@ -6,12 +6,17 @@ import '../components/todo_listview.dart';
 
 final todoProvider = ChangeNotifierProvider((ref) => ToDoData());
 
-class HomePage extends ConsumerWidget {
+class HomePage extends ConsumerStatefulWidget {
   HomePage({super.key});
   final newToDoNameController = TextEditingController();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends ConsumerState<HomePage> {
+  @override
+  Widget build(BuildContext context) {
     List<ToDo> todoList = ref.watch(todoProvider).todoList;
 
     return Scaffold(
@@ -21,7 +26,6 @@ class HomePage extends ConsumerWidget {
           "thinGS",
           style: TextStyle(fontFamily: 'RobotoMono'),
         ),
-        backgroundColor: Colors.indigo,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -30,22 +34,25 @@ class HomePage extends ConsumerWidget {
             builder: (context) => AlertDialog(
               title: const Text("Create New ToDo"),
               content: TextField(
-                controller: newToDoNameController,
+                controller: widget.newToDoNameController,
+                decoration: const InputDecoration(
+                      hintText: "ToDo Name"
+                ),
               ),
               actions: [
                 MaterialButton(
                   onPressed: () {
-                    var newToDoName = newToDoNameController.text;
-                    ref.read(todoProvider).addToDo(newToDoName);
+                    var newToDoName = widget.newToDoNameController.text;
+                    if(newToDoName.trim().isNotEmpty) ref.read(todoProvider).addToDo(newToDoName);
 
-                    newToDoNameController.clear();
+                    widget.newToDoNameController.clear();
                     Navigator.pop(context);
                   },
                   child: const Text("Save"),
                 ),
                 MaterialButton(
                   onPressed: () {
-                    newToDoNameController.clear();
+                    widget.newToDoNameController.clear();
                     Navigator.pop(context);
                   },
                   child: const Text("Cancel"),
@@ -54,7 +61,6 @@ class HomePage extends ConsumerWidget {
             ),
           );
         },
-        backgroundColor: Colors.indigo,
         child: const Icon(Icons.add),
       ),
       body: Center(
@@ -63,5 +69,11 @@ class HomePage extends ConsumerWidget {
         ),
       ),
     );
+  }
+  
+  @override
+  void dispose() {
+    widget.newToDoNameController.dispose();
+    super.dispose();
   }
 }

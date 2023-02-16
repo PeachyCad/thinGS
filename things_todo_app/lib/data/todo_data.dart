@@ -24,40 +24,49 @@ class ToDoData extends ChangeNotifier {
         description: "Do this again-again",
       ),
     ]),
+    ... 
+    List.generate(25, (index) => ToDo(name: "ToDo $index", tasks: [])
+    )
   ];
 
   List<ToDo> getToDoList() {
     return todoList;
   }
 
-  ToDo findToDo(String todoName) {
-    return todoList.firstWhere((todo) => todo.name == todoName);
+  ToDo findToDo(int todoIndex) {
+    return todoList[todoIndex];
   }
 
-  Task findTask(String todoName, String taskName) {
-    var foundToDo = findToDo(todoName);
-    return foundToDo.tasks.firstWhere((task) => task.name == taskName);
+  Task findTask(int todoIndex, int taskIndex) {
+    var foundToDo = findToDo(todoIndex);
+    return foundToDo.tasks[taskIndex];
   }
 
-  void changeTaskStatus(String todoName, String taskName) {
-    var foundTask = findTask(todoName, taskName);
-    foundTask.isCompleted = !foundTask.isCompleted;
+  void addToDo(String todoName) {
+    todoList.add(ToDo(name: todoName, tasks: []));
 
     notifyListeners();
   }
 
-  void addToDo(String name) {
-    todoList.add(ToDo(name: name, tasks: []));
+  void changeToDo(int todoIndex, String newToDoName) {
+    var foundToDo = findToDo(todoIndex);
+    foundToDo.name = newToDoName;
 
     notifyListeners();
   }
 
-  void addTask(String todoName, String taskName, String description) {
-    var foundToDo = findToDo(todoName);
+   void deleteToDo(int todoIndex) {
+    todoList.removeAt(todoIndex);
+
+    notifyListeners();
+  }
+
+    void addTask(int todoIndex, String taskName, String description) {
+    var foundToDo = findToDo(todoIndex);
 
     foundToDo.tasks.add(
       Task(
-        name: todoName,
+        name: taskName,
         description: description,
       ),
     );
@@ -65,8 +74,31 @@ class ToDoData extends ChangeNotifier {
     notifyListeners();
   }
 
-  int amountOfTasksInToDo(String todoName) {
-    var foundToDo = findToDo(todoName);
+   void deleteTask(int todoIndex, int taskIndex) {
+   var foundToDo = findToDo(todoIndex);
+   foundToDo.tasks.removeAt(taskIndex);
+
+    notifyListeners();
+  } 
+
+   void changeTaskText(int todoIndex, int taskIndex, String newTaskName, String newTaskDescription) {
+    var foundTask = findTask(todoIndex, taskIndex);
+    foundTask.name = newTaskName;
+    foundTask.description = newTaskDescription;
+
+    notifyListeners();
+  }
+
+  void changeTaskStatus(int todoIndex, int taskIndex) {
+    var foundTask = findTask(todoIndex, taskIndex);
+    foundTask.isCompleted = !foundTask.isCompleted;
+
+    notifyListeners();
+  }
+
+
+  int amountOfTasksInToDo(int todoIndex) {
+    var foundToDo = findToDo(todoIndex);
     return foundToDo.tasks.length;
   }
 }
