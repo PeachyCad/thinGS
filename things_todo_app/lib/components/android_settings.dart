@@ -23,6 +23,7 @@ class _AndroidSettingsInfoState extends State<AndroidSettingsInfo> {
         });
       });
     } on PlatformException catch (e) {
+      //TODO: use logging framework
       print("_getDeviceInfo==>${e.message}");
     }
   }

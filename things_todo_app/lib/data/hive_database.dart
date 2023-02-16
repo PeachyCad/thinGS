@@ -16,6 +16,23 @@ class HiveDataBase {
     return list;
   }
 
+  List<Map<String,List<List<String>>>> converObjectToJson(List<ToDo> todoList) {
+    final convertedToDoList = convertObjectToToDoList(todoList);
+    final convertedTasks = convertObjectToTaskList(todoList);
+
+    List<Map<String,List<List<String>>>> json = [];
+    for(int i = 0; i < convertedToDoList.length; i++) {
+     
+      Map<String,List<List<String>>> currentMap = {};
+      currentMap[convertedToDoList[i].toString()] = convertedTasks[i];
+
+      json.add(currentMap);
+    }
+    //TODO: use logging framework
+    print(json);
+    return json;
+  }
+
   List<List<List<String>>> convertObjectToTaskList(List<ToDo> todoList) {
     List<List<List<String>>> list = [];
     for(int i = 0; i < todoList.length; i++) {
