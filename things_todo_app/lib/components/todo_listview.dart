@@ -47,11 +47,15 @@ class _ToDoListViewState extends ConsumerState<ToDoListView> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TextFragment(text: widget.todoList[index].name),
+                    TextFragment(
+                      text: widget.todoList[index].name,
+                      isOverflowClip: false,
+                    ),
                     const SizedBox(height: 10),
                     TextFragment(
-                        text:
-                            "Tasks: ${widget.todoList[index].tasks.length.toString()}"),
+                      text: 'Tasks: ${widget.todoList[index].tasks.length.toString()}',
+                      isOverflowClip: false,
+                    ),      
                   ],
                 ),
               ),

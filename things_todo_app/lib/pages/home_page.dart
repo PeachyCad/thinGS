@@ -61,7 +61,7 @@ class _HomePageState extends ConsumerState<HomePage> {
             ),
           );
         },
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.add_rounded),
       ),
       body: Center(
         child: ToDoListView(

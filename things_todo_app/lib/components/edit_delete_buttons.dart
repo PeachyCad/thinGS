@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:things_todo_app/pages/home_page.dart';
 
 class EditDeleteButtons extends StatelessWidget {
   final Function() onPressedEdit;

@@ -9,6 +9,7 @@ class ToDoPage extends ConsumerWidget {
   final int todoIndex;
   final newTaskNameController = TextEditingController();
   final newTaskDescriptionController = TextEditingController();
+
   ToDoPage({super.key, required this.todoName, required this.todoIndex});
   
   @override
@@ -71,10 +72,11 @@ class ToDoPage extends ConsumerWidget {
             ),
           );
         },
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.add_rounded),
       ),
       body: Center(
         child: TaskListView(
+          todoIndex : todoIndex,
           tasks: tasks,
         ),
       ),

@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 class TextFragment extends StatelessWidget {
   final String text;
+  final bool isOverflowClip;
 
   const TextFragment({
     super.key,
     required this.text,
+    required this.isOverflowClip,
   });
 
   @override
@@ -17,7 +19,7 @@ class TextFragment extends StatelessWidget {
         fontSize: 18,
         color: Colors.white
       ),
-      overflow: TextOverflow.ellipsis,
+      overflow: isOverflowClip ? TextOverflow.clip : TextOverflow.ellipsis,
     );
   }
 }
