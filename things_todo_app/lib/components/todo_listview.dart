@@ -7,7 +7,7 @@ import 'package:things_todo_app/pages/todo_page.dart';
 
 import 'edit_delete_buttons.dart';
 
-class ToDoListView extends ConsumerStatefulWidget  {
+class ToDoListView extends ConsumerStatefulWidget {
   final List<ToDo> todoList;
   final newToDoNameController = TextEditingController();
 
@@ -25,7 +25,8 @@ class _ToDoListViewState extends ConsumerState<ToDoListView> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => ToDoPage(todoName: todoName, todoIndex: todoIndex),
+        builder: (context) =>
+            ToDoPage(todoName: todoName, todoIndex: todoIndex),
       ),
     );
   }
@@ -35,13 +36,11 @@ class _ToDoListViewState extends ConsumerState<ToDoListView> {
     return ListView.builder(
       itemCount: widget.todoList.length,
       itemBuilder: (context, index) => Padding(
-        padding: const EdgeInsets.fromLTRB(50, 20, 50, 20),
+        padding: const EdgeInsets.fromLTRB(50, 10, 50, 10),
         child: Container(
-          padding: const EdgeInsets.fromLTRB(20, 15, 5, 15),
+          padding: const EdgeInsets.fromLTRB(20, 25, 20, 25),
           decoration: BoxDecoration(
-            color: Colors.indigo,
-            borderRadius: BorderRadius.circular(12)
-          ),
+              color: Colors.indigo, borderRadius: BorderRadius.circular(12)),
           child: Row(
             children: [
               Expanded(
@@ -50,28 +49,34 @@ class _ToDoListViewState extends ConsumerState<ToDoListView> {
                   children: [
                     TextFragment(text: widget.todoList[index].name),
                     const SizedBox(height: 10),
-                    TextFragment(text: "Tasks: ${widget.todoList[index].tasks.length.toString()}"),
+                    TextFragment(
+                        text:
+                            "Tasks: ${widget.todoList[index].tasks.length.toString()}"),
                   ],
                 ),
               ),
               const SizedBox(width: 10),
               EditDeleteButtons(
-                onPressedEdit: () {
+                  onPressedEdit: () {
                     showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
                         title: const Text("Edit ToDo Name"),
                         content: TextField(
                           controller: widget.newToDoNameController,
-                          decoration: const InputDecoration(
-                                hintText: "ToDo Name"
-                          ),
+                          decoration:
+                              const InputDecoration(hintText: "ToDo Name"),
                         ),
                         actions: [
                           MaterialButton(
                             onPressed: () {
-                              var newToDoName = widget.newToDoNameController.text;
-                              if(newToDoName.trim().isNotEmpty) ref.read(todoProvider).changeToDo(index, newToDoName);
+                              var newToDoName =
+                                  widget.newToDoNameController.text;
+                              if (newToDoName.trim().isNotEmpty) {
+                                ref
+                                    .read(todoProvider)
+                                    .changeToDo(index, newToDoName);
+                              }
 
                               widget.newToDoNameController.clear();
                               Navigator.pop(context);
@@ -87,17 +92,18 @@ class _ToDoListViewState extends ConsumerState<ToDoListView> {
                           )
                         ],
                       ),
-                    );  
-                },
-                onPressedDelete: () => ref.read(todoProvider).deleteToDo(index)
-              ),
+                    );
+                  },
+                  onPressedDelete: () =>
+                      ref.read(todoProvider).deleteToDo(index)),
               IconButton(
-                icon: const Icon(
-                  Icons.arrow_forward_ios,
-                ),
-                color: Colors.white,
-                onPressed: () => goToToDoList(widget.todoList[index].name, index)
-              ),
+                  icon: const Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    size: 30,
+                  ),
+                  color: Colors.white,
+                  onPressed: () =>
+                      goToToDoList(widget.todoList[index].name, index)),
             ],
           ),
         ),
@@ -105,10 +111,10 @@ class _ToDoListViewState extends ConsumerState<ToDoListView> {
       physics: const BouncingScrollPhysics(),
     );
   }
+
   @override
   void dispose() {
     widget.newToDoNameController.dispose();
     super.dispose();
   }
 }
-

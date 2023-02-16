@@ -16,21 +16,19 @@ class EditDeleteButtons extends StatelessWidget {
     return Row(
       children: [
         IconButton(
-          icon: const Icon(
-            Icons.edit_note,
-            size: 30,
-          ),
-          color: Colors.white,
-          onPressed: () => onPressedEdit()
-        ),
+            icon: const Icon(
+              Icons.edit_note_rounded,
+              size: 30,
+            ),
+            color: Colors.white,
+            onPressed: () => onPressedEdit()),
         IconButton(
-          icon: const Icon(
-            Icons.close,
-            size: 30,
-          ),
-          color: Colors.white,
-          onPressed: () =>  onPressedDelete()
-        ),
+            icon: const Icon(
+              Icons.close_rounded,
+              size: 30,
+            ),
+            color: Colors.white,
+            onPressed: () => onPressedDelete()),
       ],
     );
   }
