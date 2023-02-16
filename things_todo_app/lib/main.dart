@@ -12,6 +12,7 @@ void main() async {
   runApp(
     ProviderScope(
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: FutureBuilder(
           future: hiveFuture,
           builder: (context, snapshot) {
