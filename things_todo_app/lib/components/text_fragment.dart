@@ -15,7 +15,6 @@ class TextFragment extends StatelessWidget {
     return Text(
       text,
       style: const TextStyle(
-        fontWeight: FontWeight.bold,
         fontSize: 18,
         color: Colors.white
       ),
