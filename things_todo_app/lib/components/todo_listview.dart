@@ -54,9 +54,10 @@ class _ToDoListViewState extends ConsumerState<ToDoListView> {
                     ),
                     const SizedBox(height: 10),
                     TextFragment(
-                      text: 'Tasks: ${widget.todoList[index].tasks.length.toString()}',
+                      text:
+                          'Tasks: ${widget.todoList[index].tasks.length.toString()}',
                       isOverflowClip: false,
-                    ),      
+                    ),
                   ],
                 ),
               ),

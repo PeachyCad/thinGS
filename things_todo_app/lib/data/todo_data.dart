@@ -26,19 +26,15 @@ class ToDoData extends ChangeNotifier {
         description: "Do this again-again",
       ),
     ]),
-    ... 
-    List.generate(25, (index) => ToDo(name: "ToDo $index", tasks: [])
-    )
+    ...List.generate(25, (index) => ToDo(name: "ToDo $index", tasks: []))
   ];
 
-
   void initializeToDoList() {
-     if(db.dataAlreadyExists()) {
+    if (db.dataAlreadyExists()) {
       todoList = db.readFromDatabase();
-     }
-     else {
+    } else {
       db.saveToDatabase(todoList);
-     }
+    }
   }
 
   List<ToDo> getToDoList() {
@@ -69,14 +65,14 @@ class ToDoData extends ChangeNotifier {
     db.saveToDatabase(todoList);
   }
 
-   void deleteToDo(int todoIndex) {
+  void deleteToDo(int todoIndex) {
     todoList.removeAt(todoIndex);
 
     notifyListeners();
     db.saveToDatabase(todoList);
   }
 
-    void addTask(int todoIndex, String taskName, String description) {
+  void addTask(int todoIndex, String taskName, String description) {
     var foundToDo = findToDo(todoIndex);
 
     foundToDo.tasks.add(
@@ -90,15 +86,16 @@ class ToDoData extends ChangeNotifier {
     db.saveToDatabase(todoList);
   }
 
-   void deleteTask(int todoIndex, int taskIndex) {
-   var foundToDo = findToDo(todoIndex);
-   foundToDo.tasks.removeAt(taskIndex);
+  void deleteTask(int todoIndex, int taskIndex) {
+    var foundToDo = findToDo(todoIndex);
+    foundToDo.tasks.removeAt(taskIndex);
 
     notifyListeners();
     db.saveToDatabase(todoList);
-  } 
+  }
 
-   void changeTaskText(int todoIndex, int taskIndex, String newTaskName, String newTaskDescription) {
+  void changeTaskText(int todoIndex, int taskIndex, String newTaskName,
+      String newTaskDescription) {
     var foundTask = findTask(todoIndex, taskIndex);
     foundTask.name = newTaskName;
     foundTask.description = newTaskDescription;
@@ -114,7 +111,6 @@ class ToDoData extends ChangeNotifier {
     notifyListeners();
     db.saveToDatabase(todoList);
   }
-
 
   int amountOfTasksInToDo(int todoIndex) {
     var foundToDo = findToDo(todoIndex);

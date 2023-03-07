@@ -40,24 +40,25 @@ class _AndroidSettingsInfoState extends State<AndroidSettingsInfo> {
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const TextFragment(
-              text: "We wiil use your device info only to improve our app later...", 
+              text:
+                  "We wiil use your device info only to improve our app later...",
               isOverflowClip: true,
             ),
             const SizedBox(
               height: 10,
             ),
             const TextFragment(
-              text: "UwU", 
+              text: "UwU",
               isOverflowClip: true,
             ),
             const SizedBox(
               height: 10,
             ),
             TextFragment(
-              text: deviceInfo, 
+              text: deviceInfo,
               isOverflowClip: true,
             ),
           ],

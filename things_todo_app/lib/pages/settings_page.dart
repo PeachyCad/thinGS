@@ -22,7 +22,11 @@ class _SettingsPageState extends State<SettingsPage> {
           style: TextStyle(fontFamily: 'RobotoMono'),
         ),
       ),
-      body: Platform.isAndroid ? const AndroidSettingsInfo() : const Center(child: TextFragment(text: "See you later", isOverflowClip: false)),
+      body: Platform.isAndroid
+          ? const AndroidSettingsInfo()
+          : const Center(
+              child:
+                  TextFragment(text: "See you later", isOverflowClip: false)),
     );
   }
 }

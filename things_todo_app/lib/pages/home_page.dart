@@ -25,8 +25,7 @@ class _HomePageState extends ConsumerState<HomePage> {
     Navigator.push(
       context,
       CupertinoPageRoute(
-        builder: (context) =>
-            const SettingsPage(),
+        builder: (context) => const SettingsPage(),
       ),
     );
   }
@@ -37,12 +36,11 @@ class _HomePageState extends ConsumerState<HomePage> {
     var json = await compute(jsonEncode, db.converObjectToJson(todoList));
 
     final http.Response response = await http.post(
-    Uri.parse('https://jsonplaceholder.typicode.com/albums'),
-    headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8',
-    },
-    body: json
-  );
+        Uri.parse('https://jsonplaceholder.typicode.com/albums'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: json);
 
     String snackMessage;
 
@@ -52,30 +50,27 @@ class _HomePageState extends ConsumerState<HomePage> {
       snackMessage = "Unknown fail";
     }
 
-    if(context.mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          backgroundColor: Colors.indigo,
-          content: Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Column(
-              children: [
-                const TextFragment(
-                  text: "Later we will be able to send and store your data ONLINE", 
-                  isOverflowClip: true,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                TextFragment(
-                  text: snackMessage, 
-                  isOverflowClip: false
-                ),
-              ],
-            ),
+    if (context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        backgroundColor: Colors.indigo,
+        content: Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: Column(
+            children: [
+              const TextFragment(
+                text:
+                    "Later we will be able to send and store your data ONLINE",
+                isOverflowClip: true,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              TextFragment(text: snackMessage, isOverflowClip: false),
+            ],
           ),
-          duration: const Duration(seconds: 2),)
-      );
+        ),
+        duration: const Duration(seconds: 2),
+      ));
     }
   }
 
@@ -99,13 +94,13 @@ class _HomePageState extends ConsumerState<HomePage> {
         ),
         actions: [
           IconButton(
-            onPressed: () => sendToServer(), 
+            onPressed: () => sendToServer(),
             icon: const Icon(
               Icons.ios_share_rounded,
             ),
           ),
           IconButton(
-            onPressed: () => goToSettings(), 
+            onPressed: () => goToSettings(),
             icon: const Icon(
               Icons.settings_rounded,
             ),
@@ -120,15 +115,14 @@ class _HomePageState extends ConsumerState<HomePage> {
               title: const Text("Create New ToDo"),
               content: TextField(
                 controller: widget.newToDoNameController,
-                decoration: const InputDecoration(
-                      hintText: "ToDo Name"
-                ),
+                decoration: const InputDecoration(hintText: "ToDo Name"),
               ),
               actions: [
                 MaterialButton(
                   onPressed: () {
                     var newToDoName = widget.newToDoNameController.text;
-                    if(newToDoName.trim().isNotEmpty) ref.read(todoProvider).addToDo(newToDoName);
+                    if (newToDoName.trim().isNotEmpty)
+                      ref.read(todoProvider).addToDo(newToDoName);
 
                     widget.newToDoNameController.clear();
                     Navigator.pop(context);
@@ -148,7 +142,6 @@ class _HomePageState extends ConsumerState<HomePage> {
         },
         child: const Icon(Icons.add_rounded),
       ),
-      
       body: Center(
         child: ToDoListView(
           todoList: todoList,
@@ -156,7 +149,7 @@ class _HomePageState extends ConsumerState<HomePage> {
       ),
     );
   }
-  
+
   @override
   void dispose() {
     widget.newToDoNameController.dispose();

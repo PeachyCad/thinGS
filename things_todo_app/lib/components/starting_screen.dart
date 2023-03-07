@@ -10,23 +10,18 @@ class StartingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: AnimatedTextKit(
-          animatedTexts: [
-            TypewriterAnimatedText(
-              'thinGS',
-              textAlign: TextAlign.center,
-              textStyle: const TextStyle(
-                fontSize: 50.0,
-                fontFamily: 'RobotoMono',
-                
-                color: Colors.white
-              ),
-              speed: const Duration(milliseconds: 200),
-            ),                     
-          ],
-          isRepeatingAnimation: true,
-        )
-      ),
+          child: AnimatedTextKit(
+        animatedTexts: [
+          TypewriterAnimatedText(
+            'thinGS',
+            textAlign: TextAlign.center,
+            textStyle: const TextStyle(
+                fontSize: 50.0, fontFamily: 'RobotoMono', color: Colors.white),
+            speed: const Duration(milliseconds: 200),
+          ),
+        ],
+        isRepeatingAnimation: true,
+      )),
     );
   }
 }

@@ -11,7 +11,7 @@ class ToDoPage extends ConsumerWidget {
   final newTaskDescriptionController = TextEditingController();
 
   ToDoPage({super.key, required this.todoName, required this.todoIndex});
-  
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     List<Task> tasks = ref.watch(todoProvider).findToDo(todoIndex).tasks;
@@ -24,7 +24,7 @@ class ToDoPage extends ConsumerWidget {
           style: const TextStyle(fontFamily: 'RobotoMono'),
         ),
       ),
-    floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton(
         onPressed: () {
           showDialog(
             context: context,
@@ -35,15 +35,12 @@ class ToDoPage extends ConsumerWidget {
                 children: [
                   TextField(
                     controller: newTaskNameController,
-                    decoration: const InputDecoration(
-                      hintText: "Task Name"
-                    ),
+                    decoration: const InputDecoration(hintText: "Task Name"),
                   ),
                   TextField(
                     controller: newTaskDescriptionController,
-                    decoration: const InputDecoration(
-                      hintText: "Task Description"
-                    ),
+                    decoration:
+                        const InputDecoration(hintText: "Task Description"),
                   ),
                 ],
               ),
@@ -52,7 +49,10 @@ class ToDoPage extends ConsumerWidget {
                   onPressed: () {
                     var newTaskName = newTaskNameController.text;
                     var newTaskDescription = newTaskDescriptionController.text;
-                    if(newTaskName.trim().isNotEmpty) ref.read(todoProvider).addTask(todoIndex, newTaskName, newTaskDescription);
+                    if (newTaskName.trim().isNotEmpty)
+                      ref
+                          .read(todoProvider)
+                          .addTask(todoIndex, newTaskName, newTaskDescription);
 
                     newTaskNameController.clear();
                     newTaskDescriptionController.clear();
@@ -76,7 +76,7 @@ class ToDoPage extends ConsumerWidget {
       ),
       body: Center(
         child: TaskListView(
-          todoIndex : todoIndex,
+          todoIndex: todoIndex,
           tasks: tasks,
         ),
       ),

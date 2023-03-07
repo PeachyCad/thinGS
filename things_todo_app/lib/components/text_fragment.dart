@@ -14,10 +14,7 @@ class TextFragment extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: const TextStyle(
-        fontSize: 18,
-        color: Colors.white
-      ),
+      style: const TextStyle(fontSize: 18, color: Colors.white),
       overflow: isOverflowClip ? TextOverflow.clip : TextOverflow.ellipsis,
     );
   }

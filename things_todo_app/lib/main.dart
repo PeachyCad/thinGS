@@ -7,7 +7,8 @@ import 'pages/home_page.dart';
 void main() async {
   await Hive.initFlutter();
 
-  Future hiveFuture = Hive.openBox("todo_db").whenComplete(() => Future.delayed(const Duration(seconds: 2)));
+  Future hiveFuture = Hive.openBox("todo_db")
+      .whenComplete(() => Future.delayed(const Duration(seconds: 2)));
 
   runApp(
     ProviderScope(
@@ -18,8 +19,7 @@ void main() async {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return HomePage();
-            } 
-            else {
+            } else {
               return const StartingScreen();
             }
           },
