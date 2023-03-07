@@ -49,10 +49,11 @@ class ToDoPage extends ConsumerWidget {
                   onPressed: () {
                     var newTaskName = newTaskNameController.text;
                     var newTaskDescription = newTaskDescriptionController.text;
-                    if (newTaskName.trim().isNotEmpty)
+                    if (newTaskName.trim().isNotEmpty) {
                       ref
                           .read(todoProvider)
                           .addTask(todoIndex, newTaskName, newTaskDescription);
+                    }
 
                     newTaskNameController.clear();
                     newTaskDescriptionController.clear();

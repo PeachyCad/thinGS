@@ -89,12 +89,13 @@ class _TaskListViewState extends ConsumerState<TaskListView> {
                                   widget.newTaskNameController.text;
                               var newTaskDescription =
                                   widget.newTaskDescriptionController.text;
-                              if (newTaskName.trim().isNotEmpty)
+                              if (newTaskName.trim().isNotEmpty) {
                                 ref.read(todoProvider).changeTaskText(
                                     widget.todoIndex,
                                     index,
                                     newTaskName,
                                     newTaskDescription);
+                              }
 
                               widget.newTaskNameController.clear();
                               widget.newTaskDescriptionController.clear();

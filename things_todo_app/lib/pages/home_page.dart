@@ -121,8 +121,9 @@ class _HomePageState extends ConsumerState<HomePage> {
                 MaterialButton(
                   onPressed: () {
                     var newToDoName = widget.newToDoNameController.text;
-                    if (newToDoName.trim().isNotEmpty)
+                    if (newToDoName.trim().isNotEmpty) {
                       ref.read(todoProvider).addToDo(newToDoName);
+                    }
 
                     widget.newToDoNameController.clear();
                     Navigator.pop(context);
