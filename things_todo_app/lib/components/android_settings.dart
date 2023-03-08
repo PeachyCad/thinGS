@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:things_todo_app/components/text_fragment.dart';
 
@@ -23,8 +24,7 @@ class _AndroidSettingsInfoState extends State<AndroidSettingsInfo> {
         });
       });
     } on PlatformException catch (e) {
-      //TODO: use logging framework
-      print("_getDeviceInfo==>${e.message}");
+      if (kDebugMode) print("_getDeviceInfo==>${e.message}");
     }
   }
 

@@ -28,8 +28,7 @@ class HiveDataBase {
 
       json.add(currentMap);
     }
-    //TODO: use logging framework
-    print(json);
+    if (kDebugMode) print(json);
     return json;
   }
 
