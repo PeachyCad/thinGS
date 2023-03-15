@@ -1,2 +1,2 @@
 # thinGS
- Flutter light-weight todo-list app
+ Flutter light-weight notes app
