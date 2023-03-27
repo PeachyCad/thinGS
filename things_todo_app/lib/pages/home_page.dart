@@ -13,15 +13,16 @@ import 'package:http/http.dart' as http;
 final todoProvider = ChangeNotifierProvider((ref) => ToDoData());
 
 class HomePage extends ConsumerStatefulWidget {
-  HomePage({super.key});
-  final newToDoNameController = TextEditingController();
+  const HomePage({super.key});
 
   @override
   ConsumerState<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends ConsumerState<HomePage> {
-  void goToSettings() {
+  final newToDoNameController = TextEditingController();
+
+  void navigateToSettings() {
     Navigator.push(
       context,
       CupertinoPageRoute(
@@ -100,7 +101,7 @@ class _HomePageState extends ConsumerState<HomePage> {
             ),
           ),
           IconButton(
-            onPressed: () => goToSettings(),
+            onPressed: () => navigateToSettings(),
             icon: const Icon(
               Icons.settings_rounded,
             ),
@@ -114,25 +115,25 @@ class _HomePageState extends ConsumerState<HomePage> {
             builder: (context) => AlertDialog(
               title: const Text("Create New ToDo"),
               content: TextField(
-                controller: widget.newToDoNameController,
+                controller: newToDoNameController,
                 decoration: const InputDecoration(hintText: "ToDo Name"),
               ),
               actions: [
                 MaterialButton(
                   onPressed: () {
-                    var newToDoName = widget.newToDoNameController.text;
+                    var newToDoName = newToDoNameController.text;
                     if (newToDoName.trim().isNotEmpty) {
                       ref.read(todoProvider).addToDo(newToDoName);
                     }
 
-                    widget.newToDoNameController.clear();
+                    newToDoNameController.clear();
                     Navigator.pop(context);
                   },
                   child: const Text("Save"),
                 ),
                 MaterialButton(
                   onPressed: () {
-                    widget.newToDoNameController.clear();
+                    newToDoNameController.clear();
                     Navigator.pop(context);
                   },
                   child: const Text("Cancel"),
@@ -153,7 +154,7 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   @override
   void dispose() {
-    widget.newToDoNameController.dispose();
+    newToDoNameController.dispose();
     super.dispose();
   }
 }
