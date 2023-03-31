@@ -10,9 +10,8 @@ import 'edit_delete_buttons.dart';
 
 class ToDoListView extends ConsumerStatefulWidget {
   final List<ToDo> todoList;
-  final newToDoNameController = TextEditingController();
 
-  ToDoListView({
+  const ToDoListView({
     required this.todoList,
     super.key,
   });
@@ -22,7 +21,9 @@ class ToDoListView extends ConsumerStatefulWidget {
 }
 
 class _ToDoListViewState extends ConsumerState<ToDoListView> {
-  void goToToDoList(String todoName, int todoIndex) {
+  final _newToDoNameController = TextEditingController();
+
+  void navigateToDoList(String todoName, int todoIndex) {
     Navigator.push(
       context,
       CupertinoPageRoute(
@@ -69,29 +70,28 @@ class _ToDoListViewState extends ConsumerState<ToDoListView> {
                       builder: (context) => AlertDialog(
                         title: const Text("Edit ToDo Name"),
                         content: TextField(
-                          controller: widget.newToDoNameController,
+                          controller: _newToDoNameController,
                           decoration:
                               const InputDecoration(hintText: "ToDo Name"),
                         ),
                         actions: [
                           MaterialButton(
                             onPressed: () {
-                              var newToDoName =
-                                  widget.newToDoNameController.text;
+                              var newToDoName = _newToDoNameController.text;
                               if (newToDoName.trim().isNotEmpty) {
                                 ref
                                     .read(todoProvider)
                                     .changeToDo(index, newToDoName);
                               }
 
-                              widget.newToDoNameController.clear();
+                              _newToDoNameController.clear();
                               Navigator.pop(context);
                             },
                             child: const Text("Save"),
                           ),
                           MaterialButton(
                             onPressed: () {
-                              widget.newToDoNameController.clear();
+                              _newToDoNameController.clear();
                               Navigator.pop(context);
                             },
                             child: const Text("Cancel"),
@@ -109,7 +109,7 @@ class _ToDoListViewState extends ConsumerState<ToDoListView> {
                   ),
                   color: Colors.white,
                   onPressed: () =>
-                      goToToDoList(widget.todoList[index].name, index)),
+                      navigateToDoList(widget.todoList[index].name, index)),
             ],
           ),
         ),
@@ -120,7 +120,7 @@ class _ToDoListViewState extends ConsumerState<ToDoListView> {
 
   @override
   void dispose() {
-    widget.newToDoNameController.dispose();
+    _newToDoNameController.dispose();
     super.dispose();
   }
 }

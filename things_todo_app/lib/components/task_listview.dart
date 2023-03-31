@@ -9,10 +9,8 @@ import 'edit_delete_buttons.dart';
 class TaskListView extends ConsumerStatefulWidget {
   final int todoIndex;
   final List<Task> tasks;
-  final newTaskNameController = TextEditingController();
-  final newTaskDescriptionController = TextEditingController();
 
-  TaskListView({
+  const TaskListView({
     required this.todoIndex,
     required this.tasks,
     super.key,
@@ -23,6 +21,9 @@ class TaskListView extends ConsumerStatefulWidget {
 }
 
 class _TaskListViewState extends ConsumerState<TaskListView> {
+  final _newTaskNameController = TextEditingController();
+  final _newTaskDescriptionController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -71,12 +72,12 @@ class _TaskListViewState extends ConsumerState<TaskListView> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             TextField(
-                              controller: widget.newTaskNameController,
+                              controller: _newTaskNameController,
                               decoration:
                                   const InputDecoration(hintText: "Task Name"),
                             ),
                             TextField(
-                              controller: widget.newTaskDescriptionController,
+                              controller: _newTaskDescriptionController,
                               decoration: const InputDecoration(
                                   hintText: "Task Description"),
                             ),
@@ -85,10 +86,9 @@ class _TaskListViewState extends ConsumerState<TaskListView> {
                         actions: [
                           MaterialButton(
                             onPressed: () {
-                              var newTaskName =
-                                  widget.newTaskNameController.text;
+                              var newTaskName = _newTaskNameController.text;
                               var newTaskDescription =
-                                  widget.newTaskDescriptionController.text;
+                                  _newTaskDescriptionController.text;
                               if (newTaskName.trim().isNotEmpty) {
                                 ref.read(todoProvider).changeTaskText(
                                     widget.todoIndex,
@@ -97,16 +97,16 @@ class _TaskListViewState extends ConsumerState<TaskListView> {
                                     newTaskDescription);
                               }
 
-                              widget.newTaskNameController.clear();
-                              widget.newTaskDescriptionController.clear();
+                              _newTaskNameController.clear();
+                              _newTaskDescriptionController.clear();
                               Navigator.pop(context);
                             },
                             child: const Text("Save"),
                           ),
                           MaterialButton(
                             onPressed: () {
-                              widget.newTaskNameController.clear();
-                              widget.newTaskDescriptionController.clear();
+                              _newTaskNameController.clear();
+                              _newTaskDescriptionController.clear();
                               Navigator.pop(context);
                             },
                             child: const Text("Cancel"),
@@ -133,8 +133,8 @@ class _TaskListViewState extends ConsumerState<TaskListView> {
 
   @override
   void dispose() {
-    widget.newTaskNameController.dispose();
-    widget.newTaskDescriptionController.dispose();
+    _newTaskNameController.dispose();
+    _newTaskDescriptionController.dispose();
     super.dispose();
   }
 }

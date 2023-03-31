@@ -20,9 +20,9 @@ class HomePage extends ConsumerStatefulWidget {
 }
 
 class _HomePageState extends ConsumerState<HomePage> {
-  final newToDoNameController = TextEditingController();
+  final _newToDoNameController = TextEditingController();
 
-  void navigateToSettings() {
+  void navigateSettings() {
     Navigator.push(
       context,
       CupertinoPageRoute(
@@ -101,7 +101,7 @@ class _HomePageState extends ConsumerState<HomePage> {
             ),
           ),
           IconButton(
-            onPressed: () => navigateToSettings(),
+            onPressed: () => navigateSettings(),
             icon: const Icon(
               Icons.settings_rounded,
             ),
@@ -115,25 +115,25 @@ class _HomePageState extends ConsumerState<HomePage> {
             builder: (context) => AlertDialog(
               title: const Text("Create New ToDo"),
               content: TextField(
-                controller: newToDoNameController,
+                controller: _newToDoNameController,
                 decoration: const InputDecoration(hintText: "ToDo Name"),
               ),
               actions: [
                 MaterialButton(
                   onPressed: () {
-                    var newToDoName = newToDoNameController.text;
+                    var newToDoName = _newToDoNameController.text;
                     if (newToDoName.trim().isNotEmpty) {
                       ref.read(todoProvider).addToDo(newToDoName);
                     }
 
-                    newToDoNameController.clear();
+                    _newToDoNameController.clear();
                     Navigator.pop(context);
                   },
                   child: const Text("Save"),
                 ),
                 MaterialButton(
                   onPressed: () {
-                    newToDoNameController.clear();
+                    _newToDoNameController.clear();
                     Navigator.pop(context);
                   },
                   child: const Text("Cancel"),
@@ -154,7 +154,7 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   @override
   void dispose() {
-    newToDoNameController.dispose();
+    _newToDoNameController.dispose();
     super.dispose();
   }
 }

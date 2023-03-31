@@ -11,16 +11,16 @@ class AndroidSettingsInfo extends StatefulWidget {
 }
 
 class _AndroidSettingsInfoState extends State<AndroidSettingsInfo> {
-  static const platform = MethodChannel('com.example.flutter/device_info');
-  String deviceInfo = "";
+  static const _platform = MethodChannel('com.example.flutter/device_info');
+  String _deviceInfo = "";
 
   Future<void> _getDeviceInfo() async {
     String result;
     try {
-      platform.invokeMethod('getDeviceInfo').then((value) {
+      _platform.invokeMethod('getDeviceInfo').then((value) {
         result = value.toString();
         setState(() {
-          deviceInfo = result;
+          _deviceInfo = result;
         });
       });
     } on PlatformException catch (e) {
@@ -58,7 +58,7 @@ class _AndroidSettingsInfoState extends State<AndroidSettingsInfo> {
               height: 10,
             ),
             TextFragment(
-              text: deviceInfo,
+              text: _deviceInfo,
               isOverflowClip: true,
             ),
           ],

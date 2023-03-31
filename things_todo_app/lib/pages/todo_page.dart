@@ -7,8 +7,8 @@ import 'home_page.dart';
 class ToDoPage extends ConsumerWidget {
   final String todoName;
   final int todoIndex;
-  final newTaskNameController = TextEditingController();
-  final newTaskDescriptionController = TextEditingController();
+  final _newTaskNameController = TextEditingController();
+  final _newTaskDescriptionController = TextEditingController();
 
   ToDoPage({super.key, required this.todoName, required this.todoIndex});
 
@@ -34,11 +34,11 @@ class ToDoPage extends ConsumerWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   TextField(
-                    controller: newTaskNameController,
+                    controller: _newTaskNameController,
                     decoration: const InputDecoration(hintText: "Task Name"),
                   ),
                   TextField(
-                    controller: newTaskDescriptionController,
+                    controller: _newTaskDescriptionController,
                     decoration:
                         const InputDecoration(hintText: "Task Description"),
                   ),
@@ -47,24 +47,24 @@ class ToDoPage extends ConsumerWidget {
               actions: [
                 MaterialButton(
                   onPressed: () {
-                    var newTaskName = newTaskNameController.text;
-                    var newTaskDescription = newTaskDescriptionController.text;
+                    var newTaskName = _newTaskNameController.text;
+                    var newTaskDescription = _newTaskDescriptionController.text;
                     if (newTaskName.trim().isNotEmpty) {
                       ref
                           .read(todoProvider)
                           .addTask(todoIndex, newTaskName, newTaskDescription);
                     }
 
-                    newTaskNameController.clear();
-                    newTaskDescriptionController.clear();
+                    _newTaskNameController.clear();
+                    _newTaskDescriptionController.clear();
                     Navigator.pop(context);
                   },
                   child: const Text("Save"),
                 ),
                 MaterialButton(
                   onPressed: () {
-                    newTaskNameController.clear();
-                    newTaskDescriptionController.clear();
+                    _newTaskNameController.clear();
+                    _newTaskDescriptionController.clear();
                     Navigator.pop(context);
                   },
                   child: const Text("Cancel"),
