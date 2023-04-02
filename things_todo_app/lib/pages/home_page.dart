@@ -88,7 +88,7 @@ class _HomePageState extends ConsumerState<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true, // this is all you need
+        centerTitle: true,
         title: const Text(
           "thinGS",
           style: TextStyle(fontFamily: 'RobotoMono'),
